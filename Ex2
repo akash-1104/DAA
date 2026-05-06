@@ -1,0 +1,50 @@
+import java.util.Scanner;
+class Point {
+    float x;
+    float y;
+    Point(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+public class ClosestPath {
+    public static double calculateDistance(Point p1, Point p2) {
+        float xDiff = p1.x - p2.x;
+        float yDiff = p1.y - p2.y;
+        return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+    }
+        public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of points (N): ");
+        int n = scanner.nextInt();
+
+        if (n < 2) {
+            System.out.println("Two or more  points are required to calculate the least distance.");
+            return;
+        }
+        Point[] points = new Point[n];
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter coordinates for point " + (i + 1) + ": ");
+            float x = scanner.nextFloat();
+            float y = scanner.nextFloat();
+            points[i] = new Point(x, y);
+        }
+        scanner.close();
+        double minDistance = Double.MAX_VALUE;
+        int p1Index = -1;
+        int p2Index = -1;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                double distance = calculateDistance(points[i], points[j]);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    p1Index = i;
+                    p2Index = j;
+                }
+            }
+        }
+        System.out.printf("The least distance found is: %.2f%n",minDistance);
+        System.out.println("Between points: (" + points[p1Index].x + ", " + points[p1Index].y + ") and ("
+                           + points[p2Index].x + ", " + points[p2Index].y + ")");
+    }
+}
