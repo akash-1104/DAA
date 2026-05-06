@@ -1,0 +1,54 @@
+import java.util.*;
+public class Sorting {
+   public void selectionSort(int[] A,int n) {
+      int min,temp;
+      for(int i=0;i<=n-2;i++)
+      {
+         min =i;
+         for( int j = i+1 ;j<=n-1;j++)
+         {
+            if(A[min] > A[j]) {
+               min = j;
+            }
+                 }
+         temp = A[min];
+         A[min] = A[i];
+         A[i] = temp;
+                 System.out.println("Pass:"+(i+1)+":"+Arrays.toString(A));
+      }
+   }
+   public void bubbleSort(int[] A,int n) {
+      int temp;
+      for(int i =0;i<=n-2;i++) {
+         for(int j =0;j<=n-2-i;j++) {
+            if(A[j] > A[j+1]) {
+               temp = A[j];
+               A[j] = A[j+1];
+               A[j+1] = temp;
+            }
+         }
+         System.out.println("Pass "+(i+1)+":"+Arrays.toString(A));
+      }
+   }
+   public static void main(String[] args) {
+      int[] arr1;
+          int[] arr2;
+      int n;
+      Sorting s = new Sorting();
+      Scanner sc = new Scanner(System.in);
+      System.out.println("Enter the size of the array: ");
+      n = sc.nextInt();
+      arr1 = new int[n];
+          arr2 = new int[n];
+      System.out.println("Enter the elements of the array: ");
+      for(int i=0;i<n;i++) {
+         arr1[i] = sc.nextInt();
+                 arr2[i] = arr1[i];
+      }
+      System.out.println("Before Sorting: "+Arrays.toString(arr1));
+      System.out.println("\nSelection sort:");
+      s.selectionSort(arr1,n);
+      System.out.println("\nBubble sort");
+      s.bubbleSort(arr2,n);
+   }
+}
